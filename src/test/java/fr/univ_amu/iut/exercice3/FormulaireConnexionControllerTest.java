@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -15,12 +14,9 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 /**
- * Test de l'exercice 3, côté vue (TestFX) : le contrôleur lie les deux champs
- * au ViewModel,
- * désactive le bouton tant que le formulaire n'est pas validable, relaie le
- * clic vers la commande
- * et affiche le statut. La logique de validation et de connexion est déjà
- * couverte sans fenêtre par
+ * Test de l'exercice 3, côté vue (TestFX) : le contrôleur lie les deux champs au ViewModel,
+ * désactive le bouton tant que le formulaire n'est pas validable, relaie le clic vers la commande
+ * et affiche le statut. La logique de validation et de connexion est déjà couverte sans fenêtre par
  * {@link FormulaireConnexionViewModelTest}.
  */
 @ExtendWith(ApplicationExtension.class)
