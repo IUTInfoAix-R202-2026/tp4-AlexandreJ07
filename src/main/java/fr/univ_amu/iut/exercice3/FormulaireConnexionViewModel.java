@@ -6,26 +6,19 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * ViewModel de l'exercice 3 : le formulaire de connexion de VigieChiro PR
- * Companion.
+ * ViewModel de l'exercice 3 : le formulaire de connexion de VigieChiro PR Companion.
  *
- * <p>
- * Cet exercice rassemble plusieurs apports du module :
+ * <p>Cet exercice rassemble plusieurs apports du module :
  *
  * <ul>
- * <li><b>validation réactive</b> : le formulaire n'est "validable" que si les
- * deux champs sont
- * remplis. La propriété {@code validable} se recalcule à chaque frappe
- * (affordance, Nielsen
- * #5 : on empêche l'erreur en désactivant le bouton) ;
- * <li>le pattern <b>Command</b> avec gestion d'erreur :
- * {@code connecterCommand} ne laisse jamais
- * remonter d'exception vers l'interface ; il publie l'état via {@code statut} ;
- * <li>la <b>dépendance à une interface</b> ({@link ServiceAuth}) plutôt qu'à
- * une implémentation :
- * c'est ce découplage qui rend le ViewModel testable (avec un faux service) et
- * que Guice
- * automatisera à l'exercice 4.
+ *   <li><b>validation réactive</b> : le formulaire n'est "validable" que si les deux champs sont
+ *       remplis. La propriété {@code validable} se recalcule à chaque frappe (affordance, Nielsen
+ *       #5 : on empêche l'erreur en désactivant le bouton) ;
+ *   <li>le pattern <b>Command</b> avec gestion d'erreur : {@code connecterCommand} ne laisse jamais
+ *       remonter d'exception vers l'interface ; il publie l'état via {@code statut} ;
+ *   <li>la <b>dépendance à une interface</b> ({@link ServiceAuth}) plutôt qu'à une implémentation :
+ *       c'est ce découplage qui rend le ViewModel testable (avec un faux service) et que Guice
+ *       automatisera à l'exercice 4.
  * </ul>
  */
 public class FormulaireConnexionViewModel {
@@ -65,8 +58,7 @@ public class FormulaireConnexionViewModel {
   }
 
   /**
-   * Commande de connexion. Met à jour {@code statut} selon le résultat. Ne lève
-   * jamais d'exception
+   * Commande de connexion. Met à jour {@code statut} selon le résultat. Ne lève jamais d'exception
    * vers l'appelant : c'est l'interface qui doit rester maîtresse de l'affichage.
    */
   public void connecterCommand() {
@@ -85,4 +77,4 @@ public class FormulaireConnexionViewModel {
       statut.set("Identifiants incorrects. Vérifiez votre saisie.");
     }
   }
-}g
+}
