@@ -9,25 +9,18 @@ import javafx.scene.control.TextField;
 /**
  * Contrôleur de vue de l'exercice 3.
  *
- * <p>
- * Le contrôleur ne contient toujours aucune logique : il lie les champs aux
- * propriétés du
- * ViewModel (bidirectionnel), lie le statut (sens unique), désactive le bouton
- * tant que le
+ * <p>Le contrôleur ne contient toujours aucune logique : il lie les champs aux propriétés du
+ * ViewModel (bidirectionnel), lie le statut (sens unique), désactive le bouton tant que le
  * formulaire n'est pas validable, et fait suivre le clic vers la commande.
  */
 public class FormulaireConnexionController {
 
   private final FormulaireConnexionViewModel viewModel;
 
-  @FXML
-  private TextField champIdentifiant;
-  @FXML
-  private PasswordField champMotDePasse;
-  @FXML
-  private Button boutonValider;
-  @FXML
-  private Label labelStatut;
+  @FXML private TextField champIdentifiant;
+  @FXML private PasswordField champMotDePasse;
+  @FXML private Button boutonValider;
+  @FXML private Label labelStatut;
 
   public FormulaireConnexionController(FormulaireConnexionViewModel viewModel) {
     this.viewModel = viewModel;
