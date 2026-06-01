@@ -6,19 +6,26 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
 /**
- * ViewModel de l'exercice 3 : le formulaire de connexion de VigieChiro PR Companion.
+ * ViewModel de l'exercice 3 : le formulaire de connexion de VigieChiro PR
+ * Companion.
  *
- * <p>Cet exercice rassemble plusieurs apports du module :
+ * <p>
+ * Cet exercice rassemble plusieurs apports du module :
  *
  * <ul>
- *   <li><b>validation réactive</b> : le formulaire n'est "validable" que si les deux champs sont
- *       remplis. La propriété {@code validable} se recalcule à chaque frappe (affordance, Nielsen
- *       #5 : on empêche l'erreur en désactivant le bouton) ;
- *   <li>le pattern <b>Command</b> avec gestion d'erreur : {@code connecterCommand} ne laisse jamais
- *       remonter d'exception vers l'interface ; il publie l'état via {@code statut} ;
- *   <li>la <b>dépendance à une interface</b> ({@link ServiceAuth}) plutôt qu'à une implémentation :
- *       c'est ce découplage qui rend le ViewModel testable (avec un faux service) et que Guice
- *       automatisera à l'exercice 4.
+ * <li><b>validation réactive</b> : le formulaire n'est "validable" que si les
+ * deux champs sont
+ * remplis. La propriété {@code validable} se recalcule à chaque frappe
+ * (affordance, Nielsen
+ * #5 : on empêche l'erreur en désactivant le bouton) ;
+ * <li>le pattern <b>Command</b> avec gestion d'erreur :
+ * {@code connecterCommand} ne laisse jamais
+ * remonter d'exception vers l'interface ; il publie l'état via {@code statut} ;
+ * <li>la <b>dépendance à une interface</b> ({@link ServiceAuth}) plutôt qu'à
+ * une implémentation :
+ * c'est ce découplage qui rend le ViewModel testable (avec un faux service) et
+ * que Guice
+ * automatisera à l'exercice 4.
  * </ul>
  */
 public class FormulaireConnexionViewModel {
@@ -36,7 +43,9 @@ public class FormulaireConnexionViewModel {
     // TODO exercice 3 : rendre le formulaire "validable" uniquement quand
     // l'identifiant ET le mot de passe sont non vides.
     //
-    // Astuce : validable.bind(identifiant.isNotEmpty().and(motDePasse.isNotEmpty()));
+    // Astuce :
+    // validable.bind(identifiant.isNotEmpty().and(motDePasse.isNotEmpty()));
+    validable.bind(identifiant.isNotEmpty().and(motDePasse.isNotEmpty()));
   }
 
   public StringProperty identifiantProperty() {
@@ -56,7 +65,8 @@ public class FormulaireConnexionViewModel {
   }
 
   /**
-   * Commande de connexion. Met à jour {@code statut} selon le résultat. Ne lève jamais d'exception
+   * Commande de connexion. Met à jour {@code statut} selon le résultat. Ne lève
+   * jamais d'exception
    * vers l'appelant : c'est l'interface qui doit rester maîtresse de l'affichage.
    */
   public void connecterCommand() {
@@ -65,7 +75,14 @@ public class FormulaireConnexionViewModel {
     // 1. Publier "Connexion en cours..." dans statut.
     // 2. Demander au serviceAuth de connecter identifiant + motDePasse.
     // 3. Selon le résultat, publier un message clair dans statut :
-    //    - succès : "Bienvenue " + identifiant + " !"
-    //    - échec  : "Identifiants incorrects. Vérifiez votre saisie."
+    // - succès : "Bienvenue " + identifiant + " !"
+    // - échec : "Identifiants incorrects. Vérifiez votre saisie."
+    statut.set("Connexion en cours...");
+    boolean succes = serviceAuth.connecter(identifiant.get(), motDePasse.get());
+    if (succes) {
+      statut.set("Bienvenue " + identifiant.get() + " !");
+    } else {
+      statut.set("Identifiants incorrects. Vérifiez votre saisie.");
+    }
   }
-}
+}g

@@ -15,9 +15,12 @@ import org.testfx.framework.junit5.ApplicationExtension;
 import org.testfx.framework.junit5.Start;
 
 /**
- * Test de l'exercice 3, côté vue (TestFX) : le contrôleur lie les deux champs au ViewModel,
- * désactive le bouton tant que le formulaire n'est pas validable, relaie le clic vers la commande
- * et affiche le statut. La logique de validation et de connexion est déjà couverte sans fenêtre par
+ * Test de l'exercice 3, côté vue (TestFX) : le contrôleur lie les deux champs
+ * au ViewModel,
+ * désactive le bouton tant que le formulaire n'est pas validable, relaie le
+ * clic vers la commande
+ * et affiche le statut. La logique de validation et de connexion est déjà
+ * couverte sans fenêtre par
  * {@link FormulaireConnexionViewModelTest}.
  */
 @ExtendWith(ApplicationExtension.class)
@@ -28,7 +31,7 @@ class FormulaireConnexionControllerTest {
     new FormulaireConnexionApp().start(stage);
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void au_demarrage_le_bouton_est_desactive(FxRobot robot) {
     Button valider = robot.lookup("#boutonValider").queryAs(Button.class);
@@ -37,7 +40,7 @@ class FormulaireConnexionControllerTest {
         .isTrue();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void remplir_les_deux_champs_active_le_bouton(FxRobot robot) {
     TextField identifiant = robot.lookup("#champIdentifiant").queryAs(TextField.class);
@@ -52,7 +55,7 @@ class FormulaireConnexionControllerTest {
         .isFalse();
   }
 
-  @Disabled("Retire cette annotation pour activer le test")
+  // @Disabled("Retire cette annotation pour activer le test")
   @Test
   void se_connecter_affiche_le_message_de_bienvenue(FxRobot robot) {
     TextField identifiant = robot.lookup("#champIdentifiant").queryAs(TextField.class);

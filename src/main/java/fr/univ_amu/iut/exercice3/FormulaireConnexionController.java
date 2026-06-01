@@ -9,18 +9,25 @@ import javafx.scene.control.TextField;
 /**
  * Contrôleur de vue de l'exercice 3.
  *
- * <p>Le contrôleur ne contient toujours aucune logique : il lie les champs aux propriétés du
- * ViewModel (bidirectionnel), lie le statut (sens unique), désactive le bouton tant que le
+ * <p>
+ * Le contrôleur ne contient toujours aucune logique : il lie les champs aux
+ * propriétés du
+ * ViewModel (bidirectionnel), lie le statut (sens unique), désactive le bouton
+ * tant que le
  * formulaire n'est pas validable, et fait suivre le clic vers la commande.
  */
 public class FormulaireConnexionController {
 
   private final FormulaireConnexionViewModel viewModel;
 
-  @FXML private TextField champIdentifiant;
-  @FXML private PasswordField champMotDePasse;
-  @FXML private Button boutonValider;
-  @FXML private Label labelStatut;
+  @FXML
+  private TextField champIdentifiant;
+  @FXML
+  private PasswordField champMotDePasse;
+  @FXML
+  private Button boutonValider;
+  @FXML
+  private Label labelStatut;
 
   public FormulaireConnexionController(FormulaireConnexionViewModel viewModel) {
     this.viewModel = viewModel;
@@ -31,14 +38,19 @@ public class FormulaireConnexionController {
     // TODO exercice 3 : brancher la vue sur le ViewModel.
     //
     // - champIdentifiant <-> identifiantProperty (bidirectionnel)
-    // - champMotDePasse  <-> motDePasseProperty  (bidirectionnel)
-    // - labelStatut      <-  statutProperty      (sens unique)
+    // - champMotDePasse <-> motDePasseProperty (bidirectionnel)
+    // - labelStatut <- statutProperty (sens unique)
     // - boutonValider désactivé tant que le formulaire n'est pas validable :
-    //     boutonValider.disableProperty().bind(viewModel.validableProperty().not());
+    // boutonValider.disableProperty().bind(viewModel.validableProperty().not());
+    champIdentifiant.textProperty().bindBidirectional(viewModel.identifiantProperty());
+    champMotDePasse.textProperty().bindBidirectional(viewModel.motDePasseProperty());
+    labelStatut.textProperty().bind(viewModel.statutProperty());
+    boutonValider.disableProperty().bind(viewModel.validableProperty().not());
   }
 
   @FXML
   private void surValider() {
     // TODO exercice 3 : déclencher la commande de connexion.
+    viewModel.connecterCommand();
   }
 }
