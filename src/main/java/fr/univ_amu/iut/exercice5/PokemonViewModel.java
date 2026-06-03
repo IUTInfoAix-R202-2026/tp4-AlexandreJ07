@@ -36,7 +36,12 @@ public class PokemonViewModel {
     // lier `resume` au nombre d'éléments (ex : "6 Pokémon").
     //
     // - pokemons.setAll(service.tousLesPokemons());
-    // - resume.bind(Bindings.size(pokemons).asString().concat(" Pokémon"));
+    // - resume se recalcule via un listener sur la liste (compatible sans plateforme JavaFX)
+    pokemons.setAll(service.tousLesPokemons());
+    resume.set(pokemons.size() + " Pokémon");
+    pokemons.addListener(
+        (javafx.collections.ListChangeListener<Pokemon>)
+            change -> resume.set(pokemons.size() + " Pokémon"));
   }
 
   public ObservableList<Pokemon> pokemonsProperty() {
@@ -69,5 +74,18 @@ public class PokemonViewModel {
     //    S'il est déjà présent : publier un statut (sans l'ajouter en double).
     //    S'il n'existe pas : publier un statut "introuvable".
     // Astuce : Optional offre ifPresentOrElse(present, absent).
+    service
+        .chercherParNom(recherche.get())
+        .ifPresentOrElse(
+            pokemon -> {
+              if (pokemons.contains(pokemon)) {
+                statut.set(pokemon.nom() + " est déjà dans la liste.");
+              } else {
+                pokemons.add(pokemon);
+                recherche.set("");
+                statut.set("");
+              }
+            },
+            () -> statut.set("Pokémon introuvable : " + recherche.get()));
   }
 }
